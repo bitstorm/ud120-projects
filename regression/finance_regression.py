@@ -29,7 +29,7 @@ target, features = targetFeatureSplit( data )
 from sklearn.cross_validation import train_test_split
 feature_train, feature_test, target_train, target_test = train_test_split(features, target, test_size=0.5, random_state=42)
 train_color = "b"
-test_color = "b"
+test_color = "r"
 
 
 
@@ -39,12 +39,15 @@ test_color = "b"
 ### "r" to differentiate training points from test points.
 
 
+from sklearn import linear_model
 
+reg = linear_model.LinearRegression()
+reg.fit(feature_train, target_train)
+print(reg.coef_)
 
+score = reg.score(feature_test, target_test)
 
-
-
-
+print(score)
 ### draw the scatterplot, with color-coded training and testing points
 import matplotlib.pyplot as plt
 for feature, target in zip(feature_test, target_test):
